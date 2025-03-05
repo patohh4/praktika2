@@ -1,0 +1,39 @@
+<project basedir="." default="run" name="praktika">
+  <!-- Define directories -->
+  <property name="src.dir" value="C:/Users/Admin/IdeaProjects/praktika/src"/>
+  <property name="lib.dir" value="C:/Users/Admin/IdeaProjects/praktika/lib"/>
+
+  <!-- Clean task -->
+  <target name="clean">
+    <delete>
+      <fileset dir="${src.dir}" includes="**/*.class"/>
+    </delete>
+  </target>
+
+  <!-- Compile task -->
+  <target name="compile">
+    <javac includeantruntime="false" srcdir="${src.dir}">
+      <classpath>
+        <fileset dir="${lib.dir}">
+          <include name="jackson-databind-2.18.2.jar"/>
+          <include name="jackson-annotations-2.18.2.jar"/>
+          <include name="jackson-core-2.18.2.jar"/>
+        </fileset>
+      </classpath>
+    </javac>
+  </target>
+
+  <!-- Run task -->
+  <target depends="compile" name="run">
+    <java classname="com.example.praktika.Main" fork="true">
+      <classpath>
+        <fileset dir="${lib.dir}">
+          <include name="jackson-databind-2.18.2.jar"/>
+          <include name="jackson-annotations-2.18.2.jar"/>
+          <include name="jackson-core-2.18.2.jar"/>
+        </fileset>
+        <path location="${src.dir}"/>
+      </classpath>
+    </java>
+  </target>
+</project>
